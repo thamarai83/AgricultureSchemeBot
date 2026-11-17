@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1600 1000" role="img" aria-labelledby="title description">
+  <title id="title">Uzhavan RAG system flow diagram</title>
+  <desc id="description">Left-to-right system diagram. The upper flow carries a farmer question from Streamlit through FastAPI and retrieval to the OpenAI model, then returns an answer with citations. The lower flow ingests PDFs and approved government pages into a persistent FAISS index.</desc>
+  <defs>
+    <linearGradient id="canvas" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f7fafc"/>
+      <stop offset="1" stop-color="#eaf0f6"/>
+    </linearGradient>
+    <filter id="shadow" x="-12%" y="-12%" width="124%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#24364b" flood-opacity=".14"/>
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M1 1 L11 6 L1 11 Z" fill="#33465d"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M1 1 L11 6 L1 11 Z" fill="#17815e"/>
+    </marker>
+    <style>
+      text { font-family: "Segoe UI", Arial, sans-serif; fill: #17243a; }
+      .title { font-size: 34px; font-weight: 750; }
+      .subtitle { font-size: 16px; fill: #596a80; }
+      .panel { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.5; }
+      .panel-title { font-size: 19px; font-weight: 750; fill: #ffffff; }
+      .section { font-size: 14px; font-weight: 750; letter-spacing: .5px; }
+      .card { fill: #ffffff; stroke-width: 1.6; rx: 15; filter: url(#shadow); }
+      .card-title { font-size: 18px; font-weight: 720; }
+      .body { font-size: 14px; fill: #34445c; }
+      .small { font-size: 12px; fill: #5b6b81; }
+      .chip-text { font-size: 11px; font-weight: 750; letter-spacing: .3px; }
+      .arrow { fill: none; stroke: #33465d; stroke-width: 3; marker-end: url(#arrow); }
+      .arrow-green { fill: none; stroke: #17815e; stroke-width: 3; marker-end: url(#arrowGreen); }
+      .dash { stroke-dasharray: 8 7; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#canvas)"/>
+  <text x="60" y="58" class="title">Uzhavan Farmer Scheme Assistant</text>
+  <text x="60" y="88" class="subtitle">Application flow · grounded answers · persistent local knowledge base</text>
+
+  <!-- Main application flow -->
+  <rect x="38" y="122" width="1524" height="462" rx="22" class="panel"/>
+  <rect x="38" y="122" width="370" height="42" rx="14" fill="#22364b"/>
+  <text x="62" y="150" class="panel-title">APPLICATION &amp; QUESTION FLOW</text>
+  <text x="70" y="194" class="section" fill="#2770b8">A · ASK A QUESTION</text>
+
+  <rect x="70" y="224" width="310" height="275" rx="19" fill="#eef5ff" stroke="#7198d5" stroke-width="1.5"/>
+  <text x="94" y="260" class="card-title">STREAMLIT FRONTEND</text>
+  <rect x="94" y="284" width="262" height="106" class="card" stroke="#9ab7e4"/>
+  <text x="116" y="315" class="section">CHAT INTERFACE</text>
+  <text x="116" y="346" class="body">Tamil or English question</text>
+  <text x="116" y="371" class="body">Conversation follow-up history</text>
+  <rect x="94" y="410" width="262" height="60" rx="12" fill="#ffffff" stroke="#c5d3e6"/>
+  <text x="112" y="436" class="small">Answer with PDF page references</text>
+  <text x="112" y="456" class="small">and official website links</text>
+
+  <rect x="458" y="266" width="270" height="190" class="card" stroke="#6497cb"/>
+  <rect x="458" y="266" width="270" height="49" rx="15" fill="#2773aa"/>
+  <text x="483" y="298" class="panel-title">FASTAPI BACKEND</text>
+  <text x="484" y="350" class="body">Request validation</text>
+  <text x="484" y="378" class="body">REST endpoint: POST /chat</text>
+  <text x="484" y="406" class="body">Response + source citations</text>
+  <rect x="484" y="423" width="112" height="20" rx="10" fill="#eaf3fb"/>
+  <text x="500" y="438" class="chip-text" fill="#2773aa">JSON API</text>
+
+  <rect x="821" y="266" width="276" height="190" class="card" stroke="#5dad8a"/>
+  <rect x="821" y="266" width="276" height="49" rx="15" fill="#268467"/>
+  <text x="847" y="298" class="panel-title">RAG RETRIEVAL</text>
+  <text x="847" y="350" class="body">Embed the question</text>
+  <text x="847" y="378" class="body">Search relevant FAISS chunks</text>
+  <text x="847" y="406" class="body">Build evidence with source IDs</text>
+  <rect x="847" y="423" width="179" height="20" rx="10" fill="#e8f6f0"/>
+  <text x="861" y="438" class="chip-text" fill="#207757">RETRIEVAL + CONTEXT</text>
+
+  <rect x="1191" y="204" width="314" height="148" class="card" stroke="#d19a48"/>
+  <rect x="1191" y="204" width="314" height="48" rx="15" fill="#cc7a27"/>
+  <text x="1217" y="235" class="panel-title">OPENAI CHAT MODEL</text>
+  <text x="1217" y="284" class="body">Receives question + retrieved context</text>
+  <text x="1217" y="310" class="body">Answers only from supporting evidence</text>
+  <text x="1217" y="334" class="small">Otherwise: says information is unavailable</text>
+
+  <rect x="1191" y="390" width="314" height="112" class="card" stroke="#84ae94"/>
+  <text x="1217" y="426" class="card-title">GROUNDED RESPONSE</text>
+  <text x="1217" y="456" class="body">Farmer-friendly answer</text>
+  <text x="1217" y="481" class="body">Cited document, page, or website</text>
+
+  <path d="M380 337 H450" class="arrow"/>
+  <text x="384" y="320" class="small">QUESTION + HISTORY</text>
+  <path d="M728 350 H813" class="arrow"/>
+  <text x="740" y="333" class="small">QUESTION</text>
+  <path d="M1097 311 H1183" class="arrow"/>
+  <text x="1104" y="294" class="small">PROMPT + EVIDENCE</text>
+  <path d="M1348 352 V382" class="arrow"/>
+  <path d="M1191 446 H1107 V472 H388 V397" class="arrow-green"/>
+  <rect x="655" y="455" width="390" height="29" rx="14" fill="#e8f6f0"/>
+  <text x="674" y="475" class="chip-text" fill="#207757">ANSWER + CITATIONS RETURN TO STREAMLIT</text>
+
+  <!-- Document ingestion flow -->
+  <rect x="38" y="622" width="1524" height="330" rx="22" class="panel"/>
+  <rect x="38" y="622" width="350" height="42" rx="14" fill="#ad641c"/>
+  <text x="62" y="650" class="panel-title">DOCUMENT INGESTION</text>
+  <text x="70" y="695" class="section" fill="#a65c16">B · UPLOAD OR SCRAPE, THEN PROCESS</text>
+
+  <rect x="70" y="724" width="258" height="176" class="card" stroke="#e0aa63"/>
+  <text x="94" y="760" class="card-title">OFFICIAL SOURCES</text>
+  <text x="94" y="794" class="body">Uploaded scheme PDFs</text>
+  <text x="94" y="821" class="body">AED subsidy schemes page</text>
+  <text x="94" y="848" class="body">Land Reforms UPT page</text>
+  <text x="94" y="879" class="small">Only configured government URLs</text>
+
+  <rect x="391" y="724" width="276" height="176" class="card" stroke="#a98bd6"/>
+  <text x="415" y="760" class="card-title">DOCUMENT PROCESSING</text>
+  <text x="415" y="794" class="body">PyMuPDF: extract PDF pages</text>
+  <text x="415" y="821" class="body">Playwright: extract web text</text>
+  <text x="415" y="848" class="body">Clean, split, attach metadata</text>
+  <text x="415" y="879" class="small">Explicit action; no launch-time crawl</text>
+
+  <rect x="730" y="724" width="250" height="176" class="card" stroke="#6cabc2"/>
+  <text x="754" y="760" class="card-title">OPENAI EMBEDDINGS</text>
+  <text x="754" y="800" class="body">Convert each text chunk</text>
+  <text x="754" y="827" class="body">to a searchable vector</text>
+  <rect x="754" y="852" width="174" height="22" rx="11" fill="#e8f5f8"/>
+  <text x="769" y="868" class="chip-text" fill="#286d83">API KEY REQUIRED</text>
+
+  <rect x="1045" y="724" width="262" height="176" class="card" stroke="#75a48a"/>
+  <text x="1069" y="760" class="card-title">LOCAL FAISS INDEX</text>
+  <text x="1069" y="798" class="body">Vectors + searchable chunks</text>
+  <text x="1069" y="825" class="body">New documents are appended</text>
+  <text x="1069" y="852" class="body">Index reloads after restart</text>
+  <text x="1069" y="879" class="small">data/faiss_index/</text>
+
+  <rect x="1370" y="724" width="150" height="176" class="card" stroke="#aab5c4"/>
+  <text x="1388" y="760" class="card-title">METADATA</text>
+  <text x="1388" y="798" class="small">Document name</text>
+  <text x="1388" y="821" class="small">Page / source URL</text>
+  <text x="1388" y="844" class="small">Department / type</text>
+  <text x="1388" y="867" class="small">Ingestion date</text>
+
+  <path d="M328 811 H383" class="arrow"/>
+  <path d="M667 811 H722" class="arrow"/>
+  <path d="M980 811 H1037" class="arrow"/>
+  <path d="M1307 811 H1362" class="arrow"/>
+
+  <!-- Retrieval reads the persisted index and its source metadata -->
+  <path d="M1176 724 V604 H954 V464" class="arrow-green dash"/>
+  <rect x="894" y="592" width="246" height="25" rx="12" fill="#e8f6f0"/>
+  <text x="910" y="609" class="chip-text" fill="#207757">RETRIEVED CHUNKS + METADATA</text>
+
+  <text x="60" y="983" class="small">Stack: Streamlit · FastAPI · Playwright · PyMuPDF · LangChain splitter · OpenAI · FAISS · local file storage</text>
+</svg>
